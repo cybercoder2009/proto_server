@@ -1,0 +1,1 @@
+pub const HASH_BYTES_LEN: usize = 32;
