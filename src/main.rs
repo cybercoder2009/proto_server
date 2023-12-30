@@ -1,13 +1,15 @@
 use std::fs;
 use std::sync::Arc;
+use actix_files::Files;
 use actix_web::{HttpServer,web,App};
 use mongodb::{Client,Database};
 use mongodb::options::ClientOptions;
-use server::r_auth::{register,login};
+use server::r_auth::{test,register,login};
 use server::s_state::State;
 use server::s_config::Config;
 
 fn routes(cfg: &mut web::ServiceConfig) {
+    cfg.route("/test", web::get().to(test));
     cfg.route("/register", web::post().to(register));
     cfg.route("/login", web::post().to(login));
 }
@@ -35,6 +37,7 @@ async fn main() -> std::io::Result<()> {
     HttpServer::new(move || {
         App::new()
         .app_data(web::Data::new(state.clone()))
+        .service(Files::new("/", "./public").index_file("index.html"))
         .service(web::scope("/rest")
         .configure(routes))
     })

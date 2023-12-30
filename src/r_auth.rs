@@ -1,7 +1,17 @@
 use actix_web::{web,Responder,HttpResponse};
 use serde::{Deserialize,Serialize};
+use serde_json::json;
 use mongodb::bson::doc;
 use crate::s_state::State;
+
+pub async fn test(
+    _state: web::Data<State>,
+) -> impl Responder {
+    println!("test");
+    HttpResponse::Ok().json(json!({
+        "msg": "hello world"
+    }))
+}
 
 #[derive(Debug,Serialize,Deserialize)]
 pub struct Register {
@@ -9,7 +19,7 @@ pub struct Register {
 }
 
 pub async fn register(
-    state: web::Data<State>,
+    _state: web::Data<State>,
     json: web::Json<Register>,
 ) -> impl Responder {
     println!("register {:?}", json);
