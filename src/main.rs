@@ -5,7 +5,7 @@ use actix_files::Files;
 use actix_web::{HttpServer,web,App};
 use mongodb::{Client,Database};
 use mongodb::options::ClientOptions;
-use server::r_auth::{test,register,login};
+use server::r_auth::{register,login};
 use server::s_state::State;
 use server::s_config::Config;
 use server::constants::HTML;
@@ -51,6 +51,7 @@ async fn main() -> std::io::Result<()> {
             .service(register)
             .service(login)
         )
+        .service(Files::new("/", "./public").index_file("index.html"))
     })
     .bind(&config.server_rest)
     .expect("err-binding-server")
