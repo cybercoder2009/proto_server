@@ -1,4 +1,4 @@
-use actix_web::{web,Responder,HttpResponse};
+use actix_web::{web,post,Responder,HttpResponse};
 use serde::{Deserialize,Serialize};
 use mongodb::bson::doc;
 use crate::s_state::State;
@@ -8,6 +8,7 @@ pub struct Register {
     pub vk: String,
 }
 
+#[post("/register")]
 pub async fn register(
     state: web::Data<State>,
     json: web::Json<Register>,
@@ -22,6 +23,7 @@ pub struct Login {
     pub password: String,
 }
 
+#[post("/login")]
 pub async fn login(
     json: web::Json<Login>,
 ) -> impl Responder {
