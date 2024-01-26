@@ -1,10 +1,11 @@
 use std::fs::{read_to_string, File};
 use std::io::Write;
 use std::sync::Arc;
+use actix_files::Files;
 use actix_web::{HttpServer,web,App};
 use mongodb::{Client,Database};
 use mongodb::options::ClientOptions;
-use server::r_auth::{register,login};
+use server::r_auth::{test,register,login};
 use server::s_state::State;
 use server::s_config::Config;
 use server::constants::HTML;

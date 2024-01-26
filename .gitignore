@@ -1,2 +1,5 @@
 target/
 Cargo.lock
+public/*
+!public/index.html
+!public/favicon.ico
