@@ -1,3 +1,4 @@
+#![doc(html_no_source)]
 pub mod constants;
 pub mod helper;
 pub mod s_config;
